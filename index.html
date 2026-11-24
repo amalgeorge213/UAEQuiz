@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1b12">
+<title>The Founding of the UAE — Live Quiz</title>
+<style>
+  :root{
+    --green:#00732F;
+    --green-lt:#2fbf6a;
+    --green-dark:#00541f;
+    --red:#E4312B;
+    --gold:#E3B341;
+    --sand:#F5F1E8;
+    --ink:#13202b;
+    --muted:#5d6b77;
+    --card:#ffffff;
+    --ok:#1a7f4b;
+    --no:#c0392b;
+    --shadow:0 18px 45px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:"Segoe UI",Roboto,-apple-system,Helvetica,Arial,sans-serif;
+    color:var(--ink);
+    min-height:100vh;
+    -webkit-text-size-adjust:100%;
+    overflow-x:hidden;
+  }
+
+  /* ================= BACKGROUND THEME ================= */
+  .bg{position:fixed;inset:0;z-index:-1;overflow:hidden;background:
+      linear-gradient(180deg,#05130d 0%, #0a2418 38%, #123322 62%, #241a12 100%);}
+  .bg .glow{position:absolute;border-radius:50%;filter:blur(70px);opacity:.5}
+  .bg .g1{width:60vw;height:60vw;left:-15vw;top:-20vw;
+      background:radial-gradient(circle,#00a34460,transparent 68%);animation:drift 18s ease-in-out infinite}
+  .bg .g2{width:52vw;height:52vw;right:-16vw;top:4vw;
+      background:radial-gradient(circle,#e4312b40,transparent 68%);animation:drift 23s ease-in-out infinite reverse}
+  .bg .g3{width:70vw;height:40vw;left:20vw;bottom:-14vw;
+      background:radial-gradient(circle,#e3b34130,transparent 70%);animation:drift 27s ease-in-out infinite}
+  @keyframes drift{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(3vw,-2vw,0) scale(1.08)}}
+
+  .stars,.stars:after{
+    position:absolute;inset:0;
+    background-image:
+      radial-gradient(1.6px 1.6px at 20% 18%, #ffffffcc, transparent),
+      radial-gradient(1.4px 1.4px at 68% 9%,  #ffffffaa, transparent),
+      radial-gradient(1.8px 1.8px at 42% 32%, #ffffff99, transparent),
+      radial-gradient(1.2px 1.2px at 86% 26%, #ffffff88, transparent),
+      radial-gradient(1.5px 1.5px at 12% 46%, #ffffff77, transparent),
+      radial-gradient(1.3px 1.3px at 56% 52%, #ffffff88, transparent),
+      radial-gradient(1.6px 1.6px at 78% 44%, #ffffff66, transparent),
+      radial-gradient(1.2px 1.2px at 33% 65%, #ffffff55, transparent);
+    animation:twinkle 5.5s ease-in-out infinite;
+  }
+  .stars:after{content:"";transform:translateY(-9%) scale(1.05);animation-delay:2.7s;opacity:.7}
+  @keyframes twinkle{0%,100%{opacity:.55}50%{opacity:1}}
+
+  .dunes{position:absolute;left:0;right:0;bottom:0;width:100%;height:46vh;min-height:280px}
+  .dunes svg{width:100%;height:100%;display:block}
+
+  .ribbon{position:absolute;top:0;left:0;right:0;height:5px;display:flex;z-index:2}
+  .ribbon span{flex:1}
+  .ribbon .g{background:var(--green)}
+  .ribbon .w{background:#fff}
+  .ribbon .b{background:#101010}
+  .ribbon .r{background:var(--red)}
+
+  /* ================= LAYOUT ================= */
+  .wrap{
+    width:100%;max-width:760px;margin:0 auto;
+    padding:calc(26px + env(safe-area-inset-top)) 14px calc(40px + env(safe-area-inset-bottom));
+  }
+  header.hero{text-align:center;color:#eaf6ee;margin-bottom:18px}
+  header.hero h1{
+    font-size:clamp(1.25rem,5.2vw,1.95rem);margin:0 0 6px;font-weight:800;letter-spacing:.2px;
+    text-shadow:0 2px 18px rgba(0,0,0,.5);
+  }
+  header.hero p{margin:0;color:#a9c6b4;font-size:.88rem}
+
+  .card{
+    background:rgba(255,255,255,.97);
+    border:1px solid rgba(255,255,255,.6);
+    border-radius:22px;
+    box-shadow:var(--shadow);
+    padding:20px 18px 22px;
+    backdrop-filter:blur(6px);
+  }
+  .card h2{margin:0}
+
+  /* ---------- start screen ---------- */
+  .field{margin:0 0 14px}
+  .field label{display:block;font-size:.8rem;font-weight:800;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--green);margin-bottom:7px}
+  .field input{
+    width:100%;font:inherit;font-size:1rem;padding:14px 15px;border-radius:13px;
+    border:2px solid #e2e7e0;background:#fbfbf8;color:var(--ink);
+  }
+  .field input:focus{outline:none;border-color:var(--green-lt);background:#fff}
+  .rules{display:grid;gap:8px;margin:16px 0 18px}
+  .rule{display:flex;gap:10px;align-items:flex-start;font-size:.9rem;color:#40505c;line-height:1.4}
+  .rule i{
+    flex:0 0 30px;height:30px;border-radius:9px;background:#eaf6ee;color:var(--green-dark);
+    display:flex;align-items:center;justify-content:center;font-style:normal;font-size:.95rem;
+  }
+
+  /* ---------- meta / progress ---------- */
+  .meta{
+    display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;
+    margin-bottom:12px;font-size:.82rem;color:var(--muted);
+  }
+  .meta .who{font-weight:800;color:#3c4b57;max-width:40%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .pill{background:var(--sand);border-radius:99px;padding:6px 11px;font-weight:700;color:#3c4b57;white-space:nowrap}
+  .pill b{color:var(--green-dark)}
+
+  .progress{height:8px;background:#e8ebe7;border-radius:99px;overflow:hidden;margin-bottom:6px}
+  .progress > i{display:block;height:100%;width:0%;
+    background:linear-gradient(90deg,var(--green),var(--green-lt));border-radius:99px;transition:width .35s ease}
+
+  .clock{display:flex;align-items:center;gap:10px;margin:10px 0 18px}
+  .clock .track{flex:1;height:12px;border-radius:99px;background:#e8ebe7;overflow:hidden}
+  .clock .track > i{
+    display:block;height:100%;width:100%;border-radius:99px;
+    background:linear-gradient(90deg,var(--green-lt),var(--green));
+  }
+  .clock .track > i.warn{background:linear-gradient(90deg,var(--gold),#c98b0d)}
+  .clock .track > i.hurry{background:linear-gradient(90deg,var(--red),#8e1d18)}
+  .clock .secs{
+    flex:0 0 auto;min-width:68px;text-align:right;font-weight:800;font-size:.95rem;color:var(--green-dark);
+    font-variant-numeric:tabular-nums;
+  }
+  .clock .secs.warn{color:#a3710a}
+  .clock .secs.hurry{color:var(--no);animation:pulse .9s ease-in-out infinite}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.09)}}
+
+  /* ---------- question ---------- */
+  .qnum{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.13em;
+    text-transform:uppercase;color:var(--green);margin-bottom:7px}
+  .qtext{font-size:clamp(1rem,4.3vw,1.25rem);font-weight:700;line-height:1.45;margin:0 0 16px}
+  .options{display:grid;gap:10px}
+  .opt{
+    display:flex;align-items:flex-start;gap:11px;text-align:left;width:100%;
+    background:#fbfbf8;border:2px solid #e6e9e3;border-radius:14px;
+    padding:14px 14px;font:inherit;font-size:.97rem;line-height:1.4;
+    cursor:pointer;transition:border-color .15s, background .15s, transform .08s;
+    color:var(--ink);-webkit-tap-highlight-color:transparent;
+  }
+  .opt:hover:not(:disabled){border-color:#9fd6b4;background:#f4fbf6}
+  .opt:active:not(:disabled){transform:scale(.99)}
+  .opt:disabled{cursor:default}
+  .key{flex:0 0 26px;height:26px;border-radius:8px;background:#e8ebe7;color:#4a5a66;
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.8rem}
+  /* locked = chosen, correctness NOT revealed */
+  .opt.picked{border-color:var(--green);background:#eef7f1}
+  .opt.picked .key{background:var(--green);color:#fff}
+  .opt.dim{opacity:.5}
+  .opt.correct{border-color:var(--ok);background:#eaf8f0}
+  .opt.correct .key{background:var(--ok);color:#fff}
+  .opt.wrong{border-color:var(--no);background:#fdeeec}
+  .opt.wrong .key{background:var(--no);color:#fff}
+  .mark{margin-left:auto;font-weight:800;font-size:.85rem;white-space:nowrap}
+
+  /* ---------- lock notice (no answer shown) ---------- */
+  .locknote{margin-top:14px;border-radius:14px;padding:13px 15px;border-left:5px solid var(--green);
+    background:#f1f7f3;font-size:.92rem;line-height:1.5;display:none}
+  .locknote.show{display:block;animation:pop .22s ease}
+  .locknote.time{border-left-color:var(--gold);background:#fdf8ec}
+  .locknote .head{font-weight:800;margin-bottom:3px;color:var(--green-dark)}
+  .locknote.time .head{color:#a3710a}
+  .locknote .sub{color:var(--muted);font-size:.86rem}
+
+  .row{display:flex;gap:10px;justify-content:flex-end;margin-top:16px;flex-wrap:wrap}
+  button.btn{
+    font:inherit;font-weight:800;font-size:.95rem;border:0;border-radius:13px;
+    padding:14px 20px;cursor:pointer;background:var(--green);color:#fff;
+    transition:background .15s,transform .08s;-webkit-tap-highlight-color:transparent;
+  }
+  button.btn:hover{background:var(--green-dark)}
+  button.btn:active{transform:translateY(1px)}
+  button.btn.block{width:100%;padding:16px}
+  button.btn.ghost{background:#eef1ec;color:#3c4b57}
+  button.btn.ghost:hover{background:#e2e7e0}
+  button.btn.gold{background:var(--gold);color:#3a2a00}
+  button.btn.gold:hover{background:#cfa32f}
+  button.btn.small{padding:11px 15px;font-size:.87rem}
+  button.btn[hidden]{display:none}
+  .hint{text-align:center;color:var(--muted);font-size:.78rem;margin-top:10px;line-height:1.5}
+  .err{color:var(--no);font-size:.85rem;font-weight:700;margin-top:8px;display:none}
+
+  /* ---------- results ---------- */
+  .result{text-align:center}
+  .podium{display:grid;gap:9px;margin:2px 0 16px;text-align:left}
+  .pcard{display:flex;gap:12px;align-items:center;border-radius:15px;padding:13px 15px;
+    border:2px solid #e8ebe7;background:#fbfbf8}
+  .pcard.winner{border-color:var(--green);background:linear-gradient(135deg,#f1fbf5,#e6f7ed)}
+  .pcard.runner{border-color:var(--gold);background:linear-gradient(135deg,#fdf9ee,#fbf3dd)}
+  .pcard .medal{font-size:1.8rem;line-height:1;flex:0 0 auto}
+  .pcard .info{flex:1;min-width:0}
+  .pcard .lbl{font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .pcard .nm{font-size:1.05rem;font-weight:900;color:var(--green-dark);word-break:break-word;line-height:1.25}
+  .pcard.runner .nm{color:#8a6410}
+  .pcard .dt{font-size:.83rem;color:var(--muted);font-weight:700;margin-top:2px}
+  .pcard .medal.tbd{opacity:.4}
+  .tie-note{font-size:.8rem;color:#a3710a;font-weight:700;margin:-8px 0 12px}
+
+  .score-ring{
+    width:150px;height:150px;margin:6px auto 10px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;position:relative;
+    background:conic-gradient(var(--green) 0deg,#e8ebe7 0deg);transition:background .7s ease;
+  }
+  .score-ring:after{content:"";position:absolute;inset:12px;border-radius:50%;background:#fff}
+  .score-ring .val{position:relative;z-index:1;text-align:center}
+  .score-ring .val b{display:block;font-size:2.2rem;line-height:1;color:var(--green-dark)}
+  .score-ring .val small{color:var(--muted);font-weight:700;font-size:.76rem;letter-spacing:.06em}
+  .you-line{font-size:.9rem;color:var(--muted);margin:0 0 4px}
+  .you-line b{color:var(--green-dark)}
+
+  .stats{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:14px 0 4px}
+  .stat{background:var(--sand);border-radius:12px;padding:9px 13px;min-width:88px}
+  .stat b{display:block;font-size:1rem;color:var(--green-dark)}
+  .stat span{font-size:.7rem;color:var(--muted);font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+
+  .divider{height:1px;background:#e8ebe7;margin:20px 0 16px}
+  .sec-title{font-size:.8rem;text-transform:uppercase;letter-spacing:.11em;color:var(--green);
+    margin:0 0 10px;font-weight:800;text-align:left}
+
+  .board{text-align:left}
+  .board ol{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+  .board li{display:flex;gap:10px;align-items:center;background:#fbfbf8;border:1px solid #e9ece6;
+    border-radius:11px;padding:9px 12px;font-size:.88rem}
+  .board li .pos{flex:0 0 22px;height:22px;border-radius:6px;background:#e8ebe7;color:#4a5a66;
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.75rem}
+  .board li.w1{border-color:var(--green);background:#f2fbf6}
+  .board li.w2{border-color:var(--gold);background:#fdf9ee}
+  .board li .nm{flex:1;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .board li .sc{font-weight:800;color:var(--green-dark);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .board .empty{color:var(--muted);font-size:.85rem;padding:2px 0}
+
+  .hostpanel{display:none;text-align:left;background:#f7f9f6;border:1px dashed #cfd8d0;
+    border-radius:14px;padding:14px;margin-top:12px}
+  .hostpanel.show{display:block}
+  .hostgrid{display:grid;grid-template-columns:1.4fr .8fr 1fr;gap:8px}
+  .hostgrid input{width:100%;font:inherit;font-size:.9rem;padding:11px 11px;border-radius:10px;
+    border:2px solid #e2e7e0;background:#fff;color:var(--ink);min-width:0}
+  .hostgrid input:focus{outline:none;border-color:var(--green-lt)}
+  .hostgrid .lbl{font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--muted);margin:0 0 5px}
+  .hostmsg{font-size:.83rem;font-weight:700;color:var(--green-dark);margin-top:8px;min-height:1.1em}
+
+  .review{margin:12px 0 0;text-align:left;display:none;gap:8px}
+  .review.show{display:grid}
+  .review .line{display:flex;gap:10px;align-items:flex-start;font-size:.86rem;
+    background:#fbfbf8;border:1px solid #e9ece6;border-radius:11px;padding:10px 11px}
+  .badge{flex:0 0 22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;
+    color:#fff;font-weight:800;font-size:.72rem}
+  .badge.y{background:var(--ok)}
+  .badge.n{background:var(--no)}
+  .badge.t{background:var(--gold)}
+  .review .line span.t{flex:1;line-height:1.4}
+  .review .line em{color:var(--muted);font-style:normal;display:block;font-size:.8rem;margin-top:3px}
+  .review a{color:var(--green-dark);word-break:break-word}
+  .qp{font-weight:800;color:var(--green-dark);font-size:.82rem}
+
+  footer.note{text-align:center;color:#9db8a9;font-size:.76rem;margin-top:16px;line-height:1.5}
+
+  @keyframes pop{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  @media (max-width:520px){
+    .wrap{padding-left:12px;padding-right:12px}
+    .card{padding:17px 14px 19px;border-radius:18px}
+    .opt{padding:13px 12px;font-size:.93rem}
+    .clock .secs{min-width:56px;font-size:.88rem}
+    .dunes{height:38vh}
+    .hostgrid{grid-template-columns:1fr 1fr}
+    .hostgrid > div:first-child{grid-column:1 / -1}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= THEME BACKGROUND ================= -->
+<div class="bg" aria-hidden="true">
+  <div class="glow g1"></div>
+  <div class="glow g2"></div>
+  <div class="glow g3"></div>
+  <div class="stars"></div>
+  <div class="dunes">
+    <svg viewBox="0 0 1440 420" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="d1" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#2a5f3d"/><stop offset="1" stop-color="#14402a"/>
+        </linearGradient>
+        <linearGradient id="d2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#8a6335"/><stop offset="1" stop-color="#5a3f20"/>
+        </linearGradient>
+        <linearGradient id="d3" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#c89a55"/><stop offset="1" stop-color="#8a6335"/>
+        </linearGradient>
+      </defs>
+      <path fill="url(#d1)" d="M0,150 C180,80 330,190 520,150 C700,112 820,40 1010,86 C1180,128 1300,90 1440,130 L1440,420 L0,420 Z"/>
+      <path fill="url(#d2)" d="M0,240 C160,180 300,270 470,250 C660,228 760,160 950,200 C1140,240 1280,205 1440,235 L1440,420 L0,420 Z"/>
+      <path fill="url(#d3)" d="M0,330 C200,290 340,360 540,344 C740,328 900,280 1100,312 C1260,338 1360,320 1440,332 L1440,420 L0,420 Z"/>
+    </svg>
+  </div>
+</div>
+<div class="ribbon" aria-hidden="true"><span class="g"></span><span class="w"></span><span class="b"></span><span class="r"></span></div>
+
+<div class="wrap">
+  <header class="hero">
+    <h1>The Founding of the United Arab Emirates</h1>
+    <p>10 questions · 20 seconds each · answers revealed by the host at the end</p>
+  </header>
+
+  <main class="card">
+    <!-- ===== START VIEW ===== -->
+    <section id="startView">
+      <h2 style="font-size:1.15rem;margin-bottom:6px">Ready to play?</h2>
+      <p style="margin:0 0 16px;color:var(--muted);font-size:.9rem">Enter your name — it's used to rank you and announce the winner.</p>
+
+      <div class="field">
+        <label for="playerName">Your name</label>
+        <input id="playerName" type="text" placeholder="e.g. Aisha Khan" autocomplete="name" maxlength="40">
+      </div>
+
+      <div class="rules">
+        <div class="rule"><i>⏱</i><span>You get <b>20 seconds</b> per question — the clock starts as each question appears.</span></div>
+        <div class="rule"><i>🔒</i><span>Answers are <b>locked, not revealed</b>. No feedback during play — tap an option or press <b>1&nbsp;2&nbsp;3&nbsp;4</b>.</span></div>
+        <div class="rule"><i>🚫</i><span>If time runs out the question is locked as unanswered and moves on automatically.</span></div>
+        <div class="rule"><i>🔑</i><span>The <b>host reveals all answers</b> at the end of the quiz.</span></div>
+        <div class="rule"><i>🏆</i><span><b>Winner</b> = most correct answers (fastest total time breaks a tie). <b>Runner-up</b> = second most correct.</span></div>
+      </div>
+
+      <button class="btn block" id="startBtn">Start the quiz →</button>
+      <div class="err" id="nameErr">Please enter your name to begin.</div>
+      <div class="hint" id="shareHint"></div>
+    </section>
+
+    <!-- ===== QUIZ VIEW ===== -->
+    <section id="quizView" hidden>
+      <div class="meta">
+        <span class="who" id="whoLabel">Player</span>
+        <span class="pill">Q <b><span id="qIndex">1</span>/<span id="qTotal">10</span></b></span>
+        <span class="pill">Locked <b id="lockedNow">0</b></span>
+      </div>
+      <div class="progress"><i id="bar"></i></div>
+
+      <div class="clock">
+        <div class="track"><i id="clockFill"></i></div>
+        <div class="secs" id="clockSecs">20s</div>
+      </div>
+
+      <div class="qnum" id="qNumLabel">Question 1</div>
+      <h2 class="qtext" id="qText">…</h2>
+      <div class="options" id="options"></div>
+
+      <div class="locknote" id="lockNote">
+        <div class="head" id="lockHead"></div>
+        <div class="sub" id="lockSub"></div>
+      </div>
+
+      <div class="row">
+        <button class="btn" id="nextBtn" hidden>Next question →</button>
+      </div>
+    </section>
+
+    <!-- ===== RESULT VIEW ===== -->
+    <section id="resultView" hidden>
+      <div class="result">
+        <div class="podium">
+          <div class="pcard winner">
+            <div class="medal" id="medal1">🏆</div>
+            <div class="info">
+              <div class="lbl">Winner</div>
+              <div class="nm" id="winName">…</div>
+              <div class="dt" id="winDetail">…</div>
+            </div>
+          </div>
+          <div class="pcard runner">
+            <div class="medal" id="medal2">🥈</div>
+            <div class="info">
+              <div class="lbl">Runner-up</div>
+              <div class="nm" id="runName">…</div>
+              <div class="dt" id="runDetail">…</div>
+            </div>
+          </div>
+        </div>
+        <div class="tie-note" id="tieNote" hidden>Exact tie on score and time — the top two share first place.</div>
+
+        <div class="score-ring" id="ring">
+          <div class="val"><b id="finalScore">0/10</b><small id="finalPct">0%</small></div>
+        </div>
+        <p class="you-line" id="youLine">Your result: <b>—</b></p>
+
+        <div class="stats">
+          <div class="stat"><b id="statCorrect">0</b><span>Correct</span></div>
+          <div class="stat"><b id="statWrong">0</b><span>Wrong</span></div>
+          <div class="stat"><b id="statTimeouts">0</b><span>Timed out</span></div>
+          <div class="stat"><b id="statTime">0:00</b><span>Your time</span></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <h3 class="sec-title">Full ranking</h3>
+        <div class="board">
+          <ol id="boardList"></ol>
+          <div class="empty" id="boardEmpty">Only you on this device so far.</div>
+        </div>
+
+        <div class="row" style="justify-content:center;margin-top:16px">
+          <button class="btn ghost small" id="hostPanelBtn">＋ Host: add a teammate's result</button>
+        </div>
+
+        <div class="hostpanel" id="hostPanel">
+          <p style="margin:0 0 10px;font-size:.84rem;color:#40505c">
+            Log results reported from other phones (score = correct answers out of 10, time = their total).
+            They are ranked instantly: most correct first, fastest time as the tie-break.
+          </p>
+          <div class="hostgrid">
+            <div>
+              <p class="lbl">Player name</p>
+              <input id="hName" type="text" placeholder="Name" maxlength="40">
+            </div>
+            <div>
+              <p class="lbl">Correct</p>
+              <input id="hScore" type="text" inputmode="numeric" placeholder="e.g. 8">
+            </div>
+            <div>
+              <p class="lbl">Time mm:ss</p>
+              <input id="hTime" type="text" inputmode="numeric" placeholder="e.g. 2:15">
+            </div>
+          </div>
+          <div class="row" style="justify-content:flex-start;margin-top:10px">
+            <button class="btn small" id="addResultBtn">Add result</button>
+            <button class="btn ghost small" id="clearBoardBtn">Clear ranking</button>
+          </div>
+          <div class="hostmsg" id="hostMsg"></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <h3 class="sec-title">Answer key</h3>
+        <div class="row" style="justify-content:center;margin-top:0">
+          <button class="btn gold" id="revealBtn">🔑 Host: reveal answers</button>
+        </div>
+        <div class="review" id="review"></div>
+
+        <div class="row" style="justify-content:center;margin-top:22px">
+          <button class="btn ghost" id="shareBtn">Copy my result</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="note">Tap an option to answer · Press 1–4 to answer, Enter for next</footer>
+</div>
+
+<script>
+/* ---------------- Quiz data ---------------- */
+const SOURCE = {label:"قيام دولة الإمارات — YouTube", url:"https://www.youtube.com/watch?v=kqFNJFLxLFI"};
+const QUESTION_TIME = 20;   // seconds per question
+const ADVANCE_DELAY = 2600; // ms to auto-advance after timeout
+
+/* Central results endpoint (Google Apps Script web app) */
+const SUBMIT_URL = "https://script.google.com/macros/s/AKfycbyTGKDn2pt1h4quB5UTvAesClH0SnWPDgw0maVV0o6Oe7XFYFXLTNDmfATtrNC21NU/exec";
+
+const QUESTIONS = [
+  {
+    q: "On what date was the United Arab Emirates officially established?",
+    options: ["2 December 1968","2 December 1970","2 December 1971","2 December 1972"],
+    answer: 2,
+    explain: "The UAE was officially established on 2 December 1971."
+  },
+  {
+    q: "Who was one of the first leaders to pursue the dream of forming the UAE?",
+    options: ["Sheikh Mohammed bin Rashid Al Maktoum","Sheikh Zayed bin Sultan Al Nahyan","Sheikh Sultan Al Qasimi","Sheikh Khalifa bin Zayed Al Nahyan"],
+    answer: 1,
+    explain: "Sheikh Zayed bin Sultan Al Nahyan was one of the first leaders to pursue the dream of a union."
+  },
+  {
+    q: "Which two emirates initially agreed to form a union together?",
+    options: ["Sharjah and Dubai","Abu Dhabi and Sharjah","Abu Dhabi and Dubai","Dubai and Ajman"],
+    answer: 2,
+    explain: "Abu Dhabi and Dubai were the first two emirates to agree to form a union."
+  },
+  {
+    q: "Which two rulers took the first major step toward forming the union?",
+    options: ["Sheikh Zayed and Sheikh Khalifa","Sheikh Zayed and Sheikh Rashid","Sheikh Rashid and Sheikh Sultan","Sheikh Zayed and Sheikh Mohammed"],
+    answer: 1,
+    explain: "Sheikh Zayed bin Sultan Al Nahyan and Sheikh Rashid bin Saeed Al Maktoum took the first major step."
+  },
+  {
+    q: "Where did Sheikh Zayed and Sheikh Rashid hold their historic meeting about uniting Abu Dhabi and Dubai?",
+    options: ["Al Ain","Dubai","Sharjah","Al Sameeh"],
+    answer: 3,
+    explain: "They met at Al Sameeh, on the border between Abu Dhabi and Dubai."
+  },
+  {
+    q: "Which two countries were initially involved in discussions about forming a larger federation with the emirates?",
+    options: ["Oman and Saudi Arabia","Bahrain and Qatar","Kuwait and Bahrain","Qatar and Oman"],
+    answer: 1,
+    explain: "Bahrain and Qatar were initially part of the discussions for a wider federation."
+  },
+  {
+    q: "How many emirates initially formed the UAE in December 1971?",
+    options: ["Five","Six","Seven","Nine"],
+    answer: 1,
+    explain: "Six emirates formed the UAE in December 1971."
+  },
+  {
+    q: "Which of these was NOT one of the six emirates that initially formed the UAE?",
+    options: ["Abu Dhabi","Dubai","Fujairah","Ras Al Khaimah"],
+    answer: 3,
+    explain: "Ras Al Khaimah joined later, in February 1972 — it was not among the original six."
+  },
+  {
+    q: "Who announced the birth of the new UAE state to the world following the July 1971 meeting?",
+    options: ["Sheikh Zayed bin Sultan Al Nahyan","Sheikh Rashid bin Saeed Al Maktoum","Ahmed Khalifa Al Suwaidi","Sheikh Sultan bin Muhammad Al Qasimi"],
+    answer: 2,
+    explain: "Ahmed Khalifa Al Suwaidi announced the birth of the new state to the world."
+  },
+  {
+    q: "Who were elected President and Vice President when the UAE was established?",
+    options: ["Sheikh Rashid as President and Sheikh Zayed as Vice President","Sheikh Zayed as President and Sheikh Khalifa as Vice President","Sheikh Zayed as President and Sheikh Rashid as Vice President","Sheikh Zayed as President and Ahmed Al Suwaidi as Vice President"],
+    answer: 2,
+    explain: "Sheikh Zayed became President and Sheikh Rashid bin Saeed Al Maktoum became Vice President."
+  }
+];
+
+/* ---------------- State ---------------- */
+const LETTERS = ["A","B","C","D"];
+const LS_KEY = "uae-founding-quiz-board";
+const LS_NAME = "uae-founding-quiz-name";
+
+let playerName = "";
+let idx = 0, score = 0, answered = false;
+const results = [];              // {picked:-1..3, correct, timedOut}
+let totalMs = 0, qStart = null;
+let clockTimer = null, clockLeft = QUESTION_TIME;
+
+const el = id => document.getElementById(id);
+const optionsBox = el("options"), lockNote = el("lockNote"), nextBtn = el("nextBtn");
+const quizView = el("quizView"), resultView = el("resultView"), startView = el("startView");
+const clockFill = el("clockFill"), clockSecs = el("clockSecs");
+
+/* ---------------- Ranking / leaderboard ---------------- */
+function loadBoard(){
+  try { return JSON.parse(localStorage.getItem(LS_KEY)) || []; }
+  catch { return []; }
+}
+function saveBoard(b){ try { localStorage.setItem(LS_KEY, JSON.stringify(b)); } catch {} }
+function better(a, b){ return a.score > b.score || (a.score === b.score && a.timeMs < b.timeMs); }
+function rankBoard(b){ return b.slice().sort((a, b2) => b2.score - a.score || a.timeMs - b2.timeMs); }
+
+/* ---------------- Start ---------------- */
+el("playerName").value = localStorage.getItem(LS_NAME) || "";
+el("playerName").addEventListener("keydown", e => { if (e.key === "Enter") startQuiz(); });
+el("startBtn").addEventListener("click", startQuiz);
+
+function startQuiz(){
+  const name = el("playerName").value.trim();
+  if (!name){ el("nameErr").style.display = "block"; el("playerName").focus(); return; }
+  el("nameErr").style.display = "none";
+  playerName = name;
+  try { localStorage.setItem(LS_NAME, name); } catch {}
+
+  idx = 0; score = 0; totalMs = 0; results.length = 0;
+  startView.hidden = true;
+  resultView.hidden = true;
+  quizView.hidden = false;
+  el("whoLabel").textContent = name;
+  render();
+}
+
+/* ---------------- Render ---------------- */
+function render(){
+  const item = QUESTIONS[idx];
+  answered = false;
+
+  el("qIndex").textContent = idx + 1;
+  el("qNumLabel").textContent = "Question " + (idx + 1);
+  el("qText").textContent = item.q;
+  el("lockedNow").textContent = idx;
+  el("bar").style.width = (idx / QUESTIONS.length * 100) + "%";
+
+  optionsBox.innerHTML = "";
+  item.options.forEach((text, i) => {
+    const b = document.createElement("button");
+    b.className = "opt";
+    b.type = "button";
+    b.innerHTML = '<span class="key">' + LETTERS[i] + '</span><span></span>';
+    b.lastChild.textContent = text;
+    b.addEventListener("click", () => choose(i));
+    optionsBox.appendChild(b);
+  });
+
+  lockNote.className = "locknote";
+  lockNote.style.display = "none";
+  nextBtn.hidden = true;
+  nextBtn.textContent = (idx === QUESTIONS.length - 1) ? "Finish → see ranking" : "Next question →";
+
+  qStart = Date.now();
+  startClock();
+}
+
+/* ---------------- Per-question 20s clock ---------------- */
+function startClock(){
+  stopClock();
+  clockLeft = QUESTION_TIME;
+  paintClock();
+  const startedAt = Date.now();
+  clockTimer = setInterval(() => {
+    const left = QUESTION_TIME - (Date.now() - startedAt) / 1000;
+    if (left <= 0){ clockLeft = 0; paintClock(); stopClock(); onTimeout(); }
+    else { clockLeft = left; paintClock(); }
+  }, 100);
+}
+function stopClock(){ if (clockTimer){ clearInterval(clockTimer); clockTimer = null; } }
+function paintClock(){
+  const pct = Math.max(0, clockLeft / QUESTION_TIME * 100);
+  clockFill.style.width = pct + "%";
+  const secs = Math.ceil(clockLeft);
+  clockSecs.textContent = secs + "s";
+  const tone = secs <= 5 ? "hurry" : secs <= 10 ? "warn" : "";
+  clockFill.className = tone;
+  clockSecs.className = "secs " + tone;
+}
+
+/* ---------------- Answer (lock only — no reveal) ---------------- */
+function choose(picked){
+  if (answered) return;
+  answered = true;
+  stopClock();
+  totalMs += Date.now() - qStart;
+
+  const item = QUESTIONS[idx];
+  if (picked === item.answer) score++;
+  results.push({picked, correct: picked === item.answer, timedOut: false});
+
+  lockOptions(picked);
+  showLock(false);
+}
+
+function onTimeout(){
+  if (answered) return;
+  answered = true;
+  totalMs += QUESTION_TIME * 1000;
+
+  const item = QUESTIONS[idx];
+  results.push({picked: -1, correct: false, timedOut: true});
+
+  lockOptions(-1);
+  showLock(true);
+  nextBtn.hidden = true;
+  setTimeout(() => {
+    if (!resultView.hidden) return;
+    if (idx < QUESTIONS.length - 1){ idx++; render(); }
+    else showResult();
+  }, ADVANCE_DELAY);
+}
+
+function lockOptions(picked){
+  const buttons = [...optionsBox.querySelectorAll(".opt")];
+  buttons.forEach((b, i) => {
+    b.disabled = true;
+    if (i === picked){
+      b.classList.add("picked");
+      b.insertAdjacentHTML("beforeend", '<span class="mark">🔒</span>');
+    } else {
+      b.classList.add("dim");
+    }
+  });
+  el("lockedNow").textContent = idx + 1;
+  el("bar").style.width = ((idx + 1) / QUESTIONS.length * 100) + "%";
+}
+
+function showLock(timedOut){
+  lockNote.className = "locknote show" + (timedOut ? " time" : "");
+  lockNote.style.display = "block";
+  if (timedOut){
+    el("lockHead").textContent = "⏰ Time's up!";
+    el("lockSub").textContent = "Locked as unanswered. Moving on in a moment…";
+  } else {
+    el("lockHead").textContent = "🔒 Answer locked";
+    el("lockSub").textContent = "No feedback yet — answers are revealed by the host at the end.";
+  }
+  if (!timedOut) nextBtn.hidden = false;
+}
+
+/* ---------------- Next / finish ---------------- */
+nextBtn.addEventListener("click", () => {
+  if (idx < QUESTIONS.length - 1){ idx++; render(); }
+  else showResult();
+});
+
+/* ---------------- Result ---------------- */
+function showResult(){
+  stopClock();
+  quizView.hidden = true;
+  resultView.hidden = false;
+
+  const total = QUESTIONS.length;
+  const timeouts = results.filter(r => r.timedOut).length;
+  const wrong = total - score - timeouts;
+
+  // save player result to device ranking (better result for same name replaces)
+  const board = loadBoard();
+  const me = {name: playerName, score, total, timeMs: totalMs, at: Date.now(), me: true};
+  const dup = board.findIndex(e => e.name.toLowerCase() === me.name.toLowerCase());
+  if (dup > -1){ if (better(me, board[dup])) board[dup] = me; }
+  else board.push(me);
+  saveBoard(board.slice(0, 20));
+  paintResult(board);
+  submitResult({name: playerName, score, total, timeMs: totalMs});
+}
+
+/* ---------------- Send result to central sheet ---------------- */
+function setSubmitStatus(text, ok){
+  let s = document.getElementById("submitStatus");
+  if (!s){
+    s = document.createElement("div");
+    s.id = "submitStatus";
+    s.style.cssText = "text-align:center;font-size:.85rem;font-weight:700;margin:10px 0 0";
+    el("ring").insertAdjacentElement("afterend", s);
+  }
+  s.textContent = text;
+  s.style.color = ok === true ? "#1a7f4b" : ok === false ? "#c0392b" : "#5d6b77";
+}
+async function submitResult(payload, attempt = 1){
+  if (!SUBMIT_URL) return;
+  setSubmitStatus("Submitting your result…");
+  try {
+    // text/plain + no-cors avoids a CORS preflight; response is opaque by design
+    await fetch(SUBMIT_URL, {
+      method: "POST", mode: "no-cors",
+      headers: {"Content-Type": "text/plain;charset=utf-8"},
+      body: JSON.stringify(payload)
+    });
+    setSubmitStatus("✓ Your result has been submitted", true);
+  } catch (err) {
+    if (attempt < 3){ setTimeout(() => submitResult(payload, attempt + 1), 2500 * attempt); }
+    else setSubmitStatus("Could not submit — check your connection and tell the host your score.", false);
+  }
+}
+
+function paintResult(board){
+  const total = QUESTIONS.length;
+  const ranked = rankBoard(board);
+  const top = ranked[0];
+  const second = ranked[1];
+  const pct = Math.round((top ? top.score : 0) / total * 100);
+
+  el("finalScore").textContent = score + "/" + total;
+  el("finalPct").textContent = Math.round(score / total * 100) + "%";
+  el("ring").style.background = "conic-gradient(" +
+    (pct >= 70 ? "#00732F" : pct >= 40 ? "#E3B341" : "#c0392b") + " " +
+    (pct * 3.6) + "deg, #e8ebe7 0deg)";
+
+  el("statCorrect").textContent = score;
+  el("statWrong").textContent = total - score - results.filter(r => r.timedOut).length;
+  el("statTimeouts").textContent = results.filter(r => r.timedOut).length;
+  el("statTime").textContent = fmtTime(totalMs);
+
+  // podium: winner = most correct, fastest time breaks tie; runner-up = second
+  if (top){
+    el("winName").textContent = top.name;
+    el("winDetail").textContent = top.score + "/" + total + " correct · " + fmtTime(top.timeMs);
+    el("medal1").textContent = top.score === total ? "🏆" : "🏅";
+    el("medal1").classList.remove("tbd");
+  } else {
+    el("winName").textContent = "—";
+    el("winDetail").textContent = "No results yet";
+  }
+
+  const exactTie = second && top && second.score === top.score && second.timeMs === top.timeMs;
+  if (second){
+    el("runName").textContent = second.name;
+    el("runDetail").textContent = second.score + "/" + second.total + " correct · " + fmtTime(second.timeMs);
+    el("medal2").classList.remove("tbd");
+  } else {
+    el("runName").textContent = "—";
+    el("runDetail").textContent = "Waiting for the next player…";
+    el("medal2").classList.add("tbd");
+  }
+  el("tieNote").hidden = !exactTie;
+
+  // my position
+  const myRank = ranked.findIndex(e => e.name.toLowerCase() === playerName.toLowerCase()) + 1;
+  const myTag = myRank === 1 ? " — you're the current winner!"
+    : myRank === 2 ? " — you're the current runner-up!"
+    : myRank > 2 ? " — you're in place #" + myRank + "!"
+    : "";
+  el("youLine").innerHTML = "";
+  el("youLine").appendChild(document.createTextNode("Your result: "));
+  const b = document.createElement("b");
+  b.textContent = score + "/" + total + " in " + fmtTime(totalMs);
+  el("youLine").appendChild(b);
+  el("youLine").appendChild(document.createTextNode(myTag));
+
+  // full ranking list
+  const list = el("boardList");
+  list.innerHTML = "";
+  ranked.slice(0, 10).forEach((e, i) => {
+    const li = document.createElement("li");
+    if (i === 0) li.className = "w1";
+    if (i === 1) li.className = "w2";
+    const pos = document.createElement("span");
+    pos.className = "pos";
+    pos.textContent = (i + 1);
+    const nm = document.createElement("span");
+    nm.className = "nm";
+    nm.textContent = e.name + (e.manual ? " ✎" : "");
+    const sc = document.createElement("span");
+    sc.className = "sc";
+    sc.textContent = e.score + "/" + e.total + " · " + fmtTime(e.timeMs);
+    li.appendChild(pos); li.appendChild(nm); li.appendChild(sc);
+    list.appendChild(li);
+  });
+  el("boardEmpty").style.display = ranked.length > 1 ? "none" : "block";
+
+  // reset host panel state
+  el("hostPanel").classList.remove("show");
+  el("hostMsg").textContent = "";
+  el("review").classList.remove("show");
+  el("revealBtn").textContent = "🔑 Host: reveal answers";
+}
+
+function fmtTime(ms){
+  const s = Math.round(ms / 1000);
+  return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0");
+}
+
+/* ---------------- Host panel ---------------- */
+el("hostPanelBtn").addEventListener("click", () => {
+  el("hostPanel").classList.toggle("show");
+});
+
+el("addResultBtn").addEventListener("click", () => {
+  const name = el("hName").value.trim();
+  const scoreVal = parseInt(el("hScore").value, 10);
+  const timeMs = parseTimeInput(el("hTime").value);
+  const msg = el("hostMsg");
+
+  if (!name){ msg.textContent = "Enter the player's name."; msg.style.color = "#c0392b"; return; }
+  if (isNaN(scoreVal) || scoreVal < 0 || scoreVal > QUESTIONS.length){
+    msg.textContent = "Score must be a whole number from 0 to " + QUESTIONS.length + ".";
+    msg.style.color = "#c0392b"; return;
+  }
+  if (timeMs === null){ msg.textContent = "Time as mm:ss (e.g. 2:15) or plain seconds."; msg.style.color = "#c0392b"; return; }
+
+  const entry = {name, score: scoreVal, total: QUESTIONS.length, timeMs, at: Date.now(), manual: true};
+  const board = loadBoard();
+  const dup = board.findIndex(e => e.name.toLowerCase() === name.toLowerCase());
+  if (dup > -1){ if (better(entry, board[dup])) board[dup] = entry; else board.splice(dup, 1); }
+  board.push(entry);
+  const saved = board.slice(0, 20);
+  saveBoard(saved);
+  paintResult(saved);
+
+  const ranked = rankBoard(saved);
+  const pos = ranked.findIndex(e => e === entry || (e.name.toLowerCase() === name.toLowerCase() && e.manual)) + 1;
+  msg.style.color = "#00541f";
+  msg.textContent = name + " added at " + scoreVal + "/" + QUESTIONS.length + " in " + fmtTime(timeMs) +
+    " — now in place #" + Math.min(pos, 10) + ".";
+  el("hName").value = ""; el("hScore").value = ""; el("hTime").value = "";
+});
+
+el("clearBoardBtn").addEventListener("click", () => {
+  saveBoard([]);
+  paintResult([]);
+  el("hostMsg").textContent = "Ranking cleared.";
+  el("hostMsg").style.color = "#00541f";
+});
+
+function parseTimeInput(v){
+  v = String(v).trim();
+  if (!v) return null;
+  if (v.indexOf(":") > -1){
+    const parts = v.split(":");
+    if (parts.length !== 2) return null;
+    const m = parseInt(parts[0], 10), s = parseInt(parts[1], 10);
+    if (isNaN(m) || isNaN(s) || m < 0 || s < 0 || s > 59) return null;
+    return (m * 60 + s) * 1000;
+  }
+  const n = parseInt(v, 10);
+  if (isNaN(n) || n < 0) return null;
+  return n * 1000;
+}
+
+/* ---------------- Reveal answers (host) ---------------- */
+el("revealBtn").addEventListener("click", () => {
+  const review = el("review");
+  if (review.classList.contains("show")){
+    review.classList.remove("show");
+    el("revealBtn").textContent = "🔑 Host: reveal answers";
+    return;
+  }
+  buildReview();
+  review.classList.add("show");
+  el("revealBtn").textContent = "Hide answers";
+  review.scrollIntoView({behavior:"smooth", block:"nearest"});
+});
+
+function buildReview(){
+  const review = el("review");
+  review.innerHTML = "";
+  QUESTIONS.forEach((item, i) => {
+    const r = results[i] || {picked: -1, correct: false, timedOut: false};
+    const line = document.createElement("div");
+    line.className = "line";
+
+    const badge = document.createElement("span");
+    badge.className = "badge " + (r.correct ? "y" : (r.timedOut ? "t" : "n"));
+    badge.textContent = r.correct ? "✔" : (r.timedOut ? "⏱" : "✘");
+
+    const body = document.createElement("span");
+    body.className = "t";
+    const qp = document.createElement("span");
+    qp.className = "qp";
+    qp.textContent = (i + 1) + ". " + item.q + " — " + LETTERS[item.answer] + ". " + item.options[item.answer];
+    body.appendChild(qp);
+
+    const em = document.createElement("em");
+    em.textContent = item.explain +
+      (r.correct ? " (you: " + LETTERS[r.picked] + ")"
+        : (r.timedOut ? " (you: timed out)"
+        : " (you: " + LETTERS[r.picked] + ". " + item.options[r.picked] + ")"));
+    body.appendChild(em);
+
+    const a = document.createElement("a");
+    a.href = SOURCE.url;
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.textContent = "Source video";
+    line.style.marginTop = "2px";
+    a.style.display = "block";
+
+    line.appendChild(badge);
+    line.appendChild(body);
+    line.appendChild(a);
+    review.appendChild(line);
+  });
+}
+
+/* ---------------- Result actions ---------------- */
+el("shareBtn").addEventListener("click", async () => {
+  const total = QUESTIONS.length;
+  const timeouts = results.filter(r => r.timedOut).length;
+  const text = "UAE Founding Quiz — " + playerName +
+    "\nScore: " + score + "/" + total +
+    "\nTime: " + fmtTime(totalMs) +
+    (timeouts ? "\nTimed out: " + timeouts : "");
+  try {
+    await navigator.clipboard.writeText(text);
+    el("shareBtn").textContent = "Copied ✓";
+  } catch {
+    alert("Copy failed — please share manually: " + text);
+  }
+  setTimeout(() => { el("shareBtn").textContent = "Copy my result"; }, 3000);
+});
+
+/* ---------------- Keyboard ---------------- */
+document.addEventListener("keydown", e => {
+  if (quizView.hidden === false){
+    if (["1","2","3","4"].includes(e.key)){
+      const i = Number(e.key) - 1;
+      if (!answered && i < QUESTIONS[idx].options.length) choose(i);
+    } else if (e.key === "Enter" && answered && !nextBtn.hidden){
+      nextBtn.click();
+    }
+  }
+});
+
+/* ---------------- Mobile share hint ---------------- */
+(function hint(){
+  try {
+    if (location.protocol === "file:"){
+      el("shareHint").textContent = "Tip: share this page's link so teammates can open it on their phones.";
+    }
+  } catch {}
+})();
+</script>
+</body>
+</html>
